@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charlotte's Web (Chapters 11–12) Quiz - Part 2</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen py-10 px-4 sm:px-6">
+
+  <!-- Header Section -->
+  <header class="max-w-2xl mx-auto text-center mb-8">
+    <p class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1">Reading Comprehension - Part 2</p>
+    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-gray-900">Charlotte's Web</h1>
+    <p class="text-sm text-gray-600 mt-1">Chapters 11 &amp; 12 Quiz (Questions 8-15)</p>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-2xl mx-auto">
+    <!-- Progress Indicator -->
+    <div class="sticky top-4 z-10 bg-white/90 backdrop-blur-md border border-gray-200 shadow-sm rounded-xl p-4 mb-6">
+      <div class="flex items-center justify-between text-xs font-semibold text-gray-600 mb-2">
+        <span>Questions Completed</span>
+        <span id="progress-text">0 / 8 answered</span>
+      </div>
+      <div class="w-full bg-gray-100 rounded-full h-2">
+        <div id="progress-bar" class="bg-gray-900 h-2 rounded-full transition-all duration-300" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Questions Form Container -->
+    <div id="quiz-list" class="space-y-6">
+      <!-- Injected dynamically via JS -->
+    </div>
+
+    <!-- Submit Section -->
+    <div class="mt-8 p-6 bg-white border border-gray-200 rounded-xl shadow-sm text-center">
+      <div id="result-box" class="hidden mb-6 p-5 rounded-lg bg-gray-50 border border-gray-200 text-center">
+        <h3 class="text-lg font-bold text-gray-900 mb-1">Quiz Completed!</h3>
+        <p class="text-sm text-gray-600">Your Final Score:</p>
+        <div class="my-3">
+          <span id="final-score" class="text-4xl font-extrabold text-gray-900">0</span>
+          <span id="final-total" class="text-gray-400 text-lg font-semibold"> / 8</span>
+        </div>
+        <p id="score-feedback" class="text-sm text-gray-600"></p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <button 
+          id="submit-all-btn" 
+          type="button" 
+          class="w-full sm:w-auto px-8 py-3 rounded-lg bg-gray-900 text-white font-medium text-sm hover:bg-gray-800 active:scale-[0.99] transition shadow-sm"
+        >
+          Submit Answers
+        </button>
+        <button 
+          id="retry-btn" 
+          type="button" 
+          class="hidden w-full sm:w-auto px-6 py-3 rounded-lg border border-gray-300 text-gray-700 font-medium text-sm hover:bg-gray-50 transition"
+        >
+          Try Again
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="max-w-2xl mx-auto text-center mt-10 text-xs text-gray-400">
+    Charlotte's Web &bull; Reading Assessment Part 2
+  </footer>
+
+  <script>
+    const questions = [
+      {
+        id: 8,
+        type: "choice",
+        passage: "On Sunday the church was full. The minister explained the miracle. He said that the words on the spider’s web proved that human beings must always be on the <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u> for the coming of wonders.",
+        question: "Choose the word that best fills in the blank based on the context of the story.",
+        options: [
+          "run",
+          "watch",
+          "defensive",
+          "fence"
+        ],
+        correctIndex: 1 // B
+      },
+      {
+        id: 9,
+        type: "choice",
+        passage: "“The message I wrote in my web, praising Wilbur, has been received. <u>The Zuckermans have fallen for it</u>, and so has everybody else. Zuckerman thinks Wilbur is an unusual pig, and therefore he won't want to kill him.”",
+        question: "What does Charlotte most likely mean by the underlined sentence?",
+        options: [
+          "They accidentally tripped near the pigpen",
+          "They have developed a strong dislike for Wilbur",
+          "They have figured out Charlotte's secret plan",
+          "They have completely believed the trick"
+        ],
+        correctIndex: 3 // D
+      },
+      {
+        id: 10,
+        type: "choice",
+        passage: "“That doesn’t make a particle of difference,” replied Charlotte. “Not a particle. <u>People believe almost anything they see in print.</u> Does anybody here know how to spell ‘terrific’?”",
+        question: "According to the underlined sentence, Charlotte thinks that people are ________.",
+        options: [
+          "stubborn",
+          "gullible",
+          "skeptical",
+          "generous"
+        ],
+        correctIndex: 1 // B
+      },
+      {
+        id: 11,
+        type: "choice",
+        passage: "“Good idea,” said Charlotte. “But I’m not sure Templeton will be willing to help. You know how he is—<u>always looking out for himself</u>, never thinking of the other fellow.”",
+        question: "According to the underlined part, Charlotte implies that Templeton is ________.",
+        options: [
+          "cowardly",
+          "clumsy",
+          "hardworking",
+          "selfish"
+        ],
+        correctIndex: 3 // D
+      },
+      {
+        id: 12,
+        type: "choice",
+        passage: null,
+        question: "In Chapter 12, how does the old sheep persuade Templeton to help Charlotte find new words for her web?",
+        options: [
+          "By pointing out that his food supply depends on Wilbur staying alive",
+          "By promising that Mrs. Zuckerman will give him fresh cheese every night",
+          "By threatening to lock him out of the barn cellar if he refuses",
+          "By telling him that the other farm animals will elect him their leader"
+        ],
+        correctIndex: 0 // A
+      },
+      {
+        id: 13,
+        type: "choice",
+        passage: "“Wilbur's destiny and your destiny are closely linked. If Wilbur is killed and his trough stands empty day after day, you’ll grow so thin we can look right through your stomach and see objects on the other side.”",
+        question: "Which figure of speech is used in the passage above?",
+        options: [
+          "Onomatopoeia",
+          "Oxymoron",
+          "Hyperbole",
+          "Personification"
+        ],
+        correctIndex: 2 // C
+      },
+      {
+        id: 14,
+        type: "choice",
+        passage: "“Thanks,” said Charlotte. “The meeting is now <u>adjourned</u>. I have a busy evening ahead of me. I’ve got to tear my web apart and write ‘Terrific.’”",
+        question: "Which of the following words can best replace the underlined word \"adjourned\"?",
+        options: [
+          "postponed",
+          "interrupted",
+          "organized",
+          "ended"
+        ],
+        correctIndex: 3 // D
+      },
+      {
+        id: 15,
+        type: "choice",
+        passage: "“You’re terrific as far as I’m concerned,” replied Charlotte, sweetly, “and that’s what <u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</u>. You're my best friend, and I think you're sensational. Now stop arguing and go get some sleep!”",
+        question: "Choose the word that best fills in the blank.",
+        options: [
+          "counts",
+          "breaks",
+          "happens",
+          "drops"
+        ],
+        correctIndex: 0 // A
+      }
+    ];
+
+    const userAnswers = {};
+    let isSubmitted = false;
+
+    const quizList = document.getElementById("quiz-list");
+    const progressBar = document.getElementById("progress-bar");
+    const progressText = document.getElementById("progress-text");
+    const submitBtn = document.getElementById("submit-all-btn");
+    const retryBtn = document.getElementById("retry-btn");
+    const resultBox = document.getElementById("result-box");
+    const finalScore = document.getElementById("final-score");
+    const finalTotal = document.getElementById("final-total");
+    const scoreFeedback = document.getElementById("score-feedback");
+
+    const optionLabels = ["A", "B", "C", "D"];
+
+    function renderQuiz() {
+      quizList.innerHTML = "";
+      questions.forEach((q, idx) => {
+        const card = document.createElement("div");
+        card.id = `q-card-${q.id}`;
+        card.className = "bg-white rounded-xl border border-gray-200 shadow-sm p-6 sm:p-7";
+
+        let passageHTML = "";
+        if (q.passage) {
+          passageHTML = `
+            <div class="mb-4 p-4 rounded-lg bg-amber-50/50 border-l-4 border-amber-400 text-sm text-gray-800 font-serif leading-relaxed">
+              ${q.passage}
+            </div>
+          `;
+        }
+
+        let inputAreaHTML = "";
+        if (q.type === "choice") {
+          inputAreaHTML = `
+            <div class="space-y-2.5 mt-4" id="options-group-${q.id}">
+              ${q.options.map((opt, optIdx) => `
+                <label 
+                  class="option-row flex items-start gap-3 p-3.5 rounded-lg border border-gray-200 hover:border-gray-400 cursor-pointer transition bg-white"
+                  data-qid="${q.id}" 
+                  data-idx="${optIdx}"
+                >
+                  <input 
+                    type="radio" 
+                    name="q_${q.id}" 
+                    value="${optIdx}" 
+                    class="sr-only"
+                    onchange="handleChoiceSelect(${q.id},${optIdx})"
+                  />
+                  <span class="label-badge w-6 h-6 rounded border border-gray-300 font-semibold text-xs flex items-center justify-center text-gray-600 shrink-0 mt-0.5">
+                    ${optionLabels[optIdx]}
+                  </span>
+                  <span class="text-sm text-gray-800 leading-snug flex-1">${opt}</span>
+                </label>
+              `).join("")}
+            </div>
+          `;
+        } else if (q.type === "text") {
+          inputAreaHTML = `
+            <div class="mt-4">
+              <label class="block text-xs font-medium text-gray-600 mb-1.5">Your Answer:</label>
+              <input 
+                type="text" 
+                id="input-text-${q.id}" 
+                placeholder="Type your answer here..." 
+                autocomplete="off"
+                oninput="handleTextAnswer(${q.id}, this.value)"
+                class="w-full p-3.5 rounded-lg border border-gray-300 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition"
+              />
+              <div id="feedback-text-${q.id}" class="hidden mt-3 p-3 rounded-lg text-sm font-medium"></div>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between text-xs font-semibold text-gray-500 mb-2">
+            <span>QUESTION ${q.id}</span>
+            <span class="text-xs uppercase px-2 py-0.5 rounded bg-gray-100 text-gray-600 font-medium">
+              ${q.type === "choice" ? "Multiple Choice" : "Short Answer"}
+            </span>
+          </div>
+          ${passageHTML}
+          <h2 class="text-base sm:text-lg font-semibold text-gray-900 leading-snug">
+            ${q.question}
+          </h2>
+          ${inputAreaHTML}
+        `;
+
+        quizList.appendChild(card);
+      });
+
+      updateProgress();
+    }
+
+    window.handleChoiceSelect = function(qid, optIdx) {
+      if (isSubmitted) return;
+      userAnswers[qid] = optIdx;
+
+      const group = document.getElementById(`options-group-${qid}`);
+      const rows = group.querySelectorAll(".option-row");
+      rows.forEach(row => {
+        const idx = parseInt(row.getAttribute("data-idx"), 10);
+        const badge = row.querySelector(".label-badge");
+        if (idx === optIdx) {
+          row.className = "option-row flex items-start gap-3 p-3.5 rounded-lg border-2 border-gray-900 bg-gray-50 cursor-pointer";
+          badge.className = "label-badge w-6 h-6 rounded bg-gray-900 text-white font-semibold text-xs flex items-center justify-center shrink-0 mt-0.5";
+        } else {
+          row.className = "option-row flex items-start gap-3 p-3.5 rounded-lg border border-gray-200 hover:border-gray-400 cursor-pointer bg-white transition";
+          badge.className = "label-badge w-6 h-6 rounded border border-gray-300 font-semibold text-xs flex items-center justify-center text-gray-600 shrink-0 mt-0.5";
+        }
+      });
+
+      updateProgress();
+    };
+
+    window.handleTextAnswer = function(qid, val) {
+      if (isSubmitted) return;
+      if (val.trim().length > 0) {
+        userAnswers[qid] = val.trim();
+      } else {
+        delete userAnswers[qid];
+      }
+      updateProgress();
+    };
+
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const totalCount = questions.length;
+      const pct = Math.round((answeredCount / totalCount) * 100);
+      progressBar.style.width = `${pct}%`;
+      progressText.textContent = `${answeredCount} / ${totalCount} answered`;
+    }
+
+    function cleanString(str) {
+      return (str || "")
+        .toLowerCase()
+        .replace(/["'“”.,!?]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function evaluateAnswers() {
+      if (isSubmitted) return;
+      isSubmitted = true;
+
+      let score = 0;
+
+      questions.forEach(q => {
+        const card = document.getElementById(`q-card-${q.id}`);
+
+        if (q.type === "choice") {
+          const selected = userAnswers[q.id];
+          const isCorrect = selected === q.correctIndex;
+          if (isCorrect) score++;
+
+          const rows = card.querySelectorAll(".option-row");
+          rows.forEach(row => {
+            const idx = parseInt(row.getAttribute("data-idx"), 10);
+            const badge = row.querySelector(".label-badge");
+            const radio = row.querySelector("input");
+            radio.disabled = true;
+            row.classList.remove("hover:border-gray-400", "cursor-pointer");
+            row.classList.add("cursor-default");
+
+            if (idx === q.correctIndex) {
+              row.className = "option-row flex items-start gap-3 p-3.5 rounded-lg border border-emerald-500 bg-emerald-50/70 text-gray-900 cursor-default";
+              badge.className = "label-badge w-6 h-6 rounded bg-emerald-600 text-white font-semibold text-xs flex items-center justify-center shrink-0 mt-0.5";
+            } else if (idx === selected && !isCorrect) {
+              row.className = "option-row flex items-start gap-3 p-3.5 rounded-lg border border-rose-400 bg-rose-50/70 text-gray-900 cursor-default";
+              badge.className = "label-badge w-6 h-6 rounded bg-rose-500 text-white font-semibold text-xs flex items-center justify-center shrink-0 mt-0.5";
+            } else {
+              row.className = "option-row flex items-start gap-3 p-3.5 rounded-lg border border-gray-200 bg-white opacity-40 cursor-default";
+            }
+          });
+        } else if (q.type === "text") {
+          const rawInput = userAnswers[q.id] || "";
+          const textInput = document.getElementById(`input-text-${q.id}`);
+          const feedback = document.getElementById(`feedback-text-${q.id}`);
+          textInput.disabled = true;
+
+          const isCorrect = q.acceptedAnswers.some(ans => cleanString(ans) === cleanString(rawInput));
+          if (isCorrect) score++;
+
+          feedback.classList.remove("hidden");
+          if (isCorrect) {
+            textInput.className = "w-full p-3.5 rounded-lg border border-emerald-500 bg-emerald-50/50 text-sm text-gray-900";
+            feedback.className = "mt-3 p-3 rounded-lg text-sm font-medium bg-emerald-100 text-emerald-800";
+            feedback.textContent = "Correct!";
+          } else {
+            textInput.className = "w-full p-3.5 rounded-lg border border-rose-400 bg-rose-50/50 text-sm text-gray-900";
+            feedback.className = "mt-3 p-3 rounded-lg text-sm font-medium bg-rose-100 text-rose-800";
+            feedback.textContent = `Incorrect. Correct answer: "${q.acceptedAnswers[0]}"`;
+          }
+        }
+      });
+
+      // Display Final Summary
+      resultBox.classList.remove("hidden");
+      finalScore.textContent = score;
+      finalTotal.textContent = ` / ${questions.length}`;
+
+      if (score === questions.length) {
+        scoreFeedback.textContent = "Excellent work! Perfect score!";
+      } else if (score >= Math.ceil(questions.length * 0.7)) {
+        scoreFeedback.textContent = "Good job! You have a great grasp of these chapters.";
+      } else {
+        scoreFeedback.textContent = "Keep reading and review the questions above!";
+      }
+
+      submitBtn.classList.add("hidden");
+      retryBtn.classList.remove("hidden");
+
+      // Smooth scroll down to results
+      resultBox.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function resetQuiz() {
+      for (const key in userAnswers) {
+        delete userAnswers[key];
+      }
+      isSubmitted = false;
+      resultBox.classList.add("hidden");
+      retryBtn.classList.add("hidden");
+      submitBtn.classList.remove("hidden");
+      renderQuiz();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    submitBtn.addEventListener("click", evaluateAnswers);
+    retryBtn.addEventListener("click", resetQuiz);
+
+    // Initial load
+    renderQuiz();
+  </script>
+</body>
+</html>
